@@ -15,23 +15,35 @@ func main() {
 	var magicNumber = rand.IntN(100)
 	fmt.Println("MagicNumber generated. Good game !")
 
-	var userInput int
-	for {
-		fmt.Print("Try a number : ")
-		fmt.Scan(&userInput)
+	remainingTries := 6
+	for remainingTries > 0 {
+		fmt.Printf("%d attempts lefts. Try a number : ", remainingTries)
+		userInput := getUserInput()
 		fmt.Printf("Testing %d\n", userInput)
 
 		if userInput == magicNumber {
 			fmt.Println("Victory")
 			return
-		}
-		if userInput > magicNumber {
+		} else if userInput > magicNumber {
 			fmt.Println("Your number is too big")
-			continue
-		}
-		if userInput < magicNumber {
+		} else if userInput < magicNumber {
 			fmt.Println("Your number is too small")
-			continue
 		}
+
+		remainingTries--
+		if remainingTries == 0 {
+			fmt.Printf("You lost the game, it was %d. Wanna play again ?\n", magicNumber)
+		}
+	}
+}
+
+func getUserInput() int {
+	var userInput int
+	for {
+		fmt.Scan(&userInput)
+		if userInput > 0 {
+			return userInput
+		}
+		fmt.Println("Invalid number. Number need to be positive (> 0)")
 	}
 }
