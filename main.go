@@ -1,21 +1,37 @@
 package main
 
 import (
-  "fmt"
+	"fmt"
+	"math/rand/v2"
 )
 
-//TIP <p>To run your code, right-click the code and select <b>Run</b>.</p> <p>Alternatively, click
-// the <icon src="AllIcons.Actions.Execute"/> icon in the gutter and select the <b>Run</b> menu item from here.</p>
-
+// 1. Generate RandomNumber
+// 2. Loop asking for user to insert a number (Validate that it is a number)
+// 3. Correct: Stop
+// 4. Not correct:
+// 4.1 : User gives a bigger number: Notify him
+// 4.2 : User gives a smaller number: Notify him.
 func main() {
-  //TIP <p>Press <shortcut actionId="ShowIntentionActions"/> when your caret is at the underlined text
-  // to see how GoLand suggests fixing the warning.</p><p>Alternatively, if available, click the lightbulb to view possible fixes.</p>
-  s := "gopher"
-  fmt.Println("Hello and welcome, %s!", s)
+	var magicNumber = rand.IntN(100)
+	fmt.Println("MagicNumber generated. Good game !")
 
-  for i := 1; i <= 5; i++ {
-	//TIP <p>To start your debugging session, right-click your code in the editor and select the Debug option.</p> <p>We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-	// for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.</p>
-	fmt.Println("i =", 100/i)
-  }
+	var userInput int
+	for {
+		fmt.Print("Try a number : ")
+		fmt.Scan(&userInput)
+		fmt.Printf("Testing %d\n", userInput)
+
+		if userInput == magicNumber {
+			fmt.Println("Victory")
+			return
+		}
+		if userInput > magicNumber {
+			fmt.Println("Your number is too big")
+			continue
+		}
+		if userInput < magicNumber {
+			fmt.Println("Your number is too small")
+			continue
+		}
+	}
 }
